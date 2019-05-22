@@ -10,90 +10,65 @@ import UIKit
 import Alamofire
 import SwiftyJSON
 
-class ViewController: UIViewController, UITableViewDataSource, UITableViewDelegate {
-    
-    func tableView(_ tableView: UITableView, titleForHeaderInSection section : Int) -> String? {
-        return sections[section]
-    }
-    
-    func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
-        // Create an object of the dynamic cell "PlainCell"
-        let cell = tableView.dequeueReusableCell(withIdentifier: "PlainCell", for: indexPath)
-        // Depending on the section, fill the textLabel with the relevant text
-        switch indexPath.section {
-        case 0:
-            // Fruit Section
-            cell.textLabel?.text = contacts[indexPath.row].name
-            break
-        case 1:
-            // Vegetable Section
-            cell.textLabel?.text = contacts[indexPath.row].email
-            break
-        default:
-            break
-        }
-        
-        // Return the configured cell
-        return cell
-        
-    }
-    
-    func numberOfSections(in tableView: UITableView) -> Int {
-        return sections.count
-    }
-    
-    func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
-        switch section {
-        case 0:
-            // Fruit Section
-            return contacts.count
-        case 1:
-            // Vegetable Section
-            return contacts.count
-        default:
-            return 0
-        }
-    }
+class ViewController: UIViewController {
     
     
+    
+    @IBOutlet weak var nameLabel: UILabel!
+    @IBOutlet weak var realNameLabel: UILabel!
+    @IBOutlet weak var emailLabel: UILabel!
+    @IBOutlet weak var phoneLabel: UILabel!
     
     
     let Url = "http://localhost:8080/contacts"
-    var contacts : [Contact] = []
+    var contact : Contact = Contact()
     var sections = ["Id", "Name", "Email", "Phone"]
     var fruit = ["Orange", "Apple"]
     var vegetables = ["Test", "Test"]
     
+    var index = 0
+    
+    var name : String = ""
+    
+    var id : Int = 0
+    
 
     override func viewDidLoad() {
         super.viewDidLoad()
-        getData(url: Url)
-       
-        // Do any additional setup after loading the view, typically from a nib.
+        getData()
+
         
+        // Do any additional setup after loading the view, typically from a nib.       
     }
     
-    func getData(url: String) {
-        Alamofire.request(url, method: .get).responseJSON {
+    func getData() {
+        let test = "\(self.Url)/\(self.id)"
+        Alamofire.request(test, method: .get).responseJSON {
             response in
             if response.result.isSuccess {
                 print("Success! We got weather data")
                 
                 let weatherJSON : JSON = JSON(response.result.value!)
-                print(weatherJSON[0])
-                for n in 0...10 {
-                    let c = Contact()
-                    c.id = weatherJSON[n]["id"].intValue
-                    c.name = weatherJSON[n]["name"].stringValue
-                    c.email = weatherJSON[n]["email"].stringValue
-                    c.phone = weatherJSON[n]["phone"].stringValue
-                    self.contacts.append(c)
-                }                
+                self.contact.id = weatherJSON["id"].intValue
+                print(self.contact.id)
+                self.contact.name = weatherJSON["name"].stringValue
+                self.contact.email = weatherJSON["email"].stringValue
+                self.contact.phone = weatherJSON["phone"].stringValue
+                
+                
+                self.setData()
             }
             else {
                 print("Error \(String(describing: response.result.error))")
             }
         }
+    }
+    
+    func setData() {
+        self.nameLabel.text = "\(self.contact.id)"
+        self.realNameLabel.text = self.contact.name
+        self.emailLabel.text = self.contact.email
+        self.phoneLabel.text = self.contact.phone
     }
 
 
