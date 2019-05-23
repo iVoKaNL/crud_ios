@@ -10,6 +10,13 @@ import UIKit
 import Alamofire
 import SwiftyJSON
 
+class ContactTableViewCell:UITableViewCell {
+    
+    @IBOutlet weak var contactNameLabel: UILabel!
+    @IBOutlet weak var contactEmailLabel: UILabel!
+}
+
+
 class TableControllerTableViewController: UITableViewController {
 
     var TableData:Array<Contact> = Array<Contact>()
@@ -18,7 +25,6 @@ class TableControllerTableViewController: UITableViewController {
     var myIndex = 0
     
     override func viewDidLoad() {
-        print("test")
         super.viewDidLoad()
         getData(url : Url)
         // Uncomment the following line to preserve selection between presentations
@@ -43,8 +49,10 @@ class TableControllerTableViewController: UITableViewController {
     
     override func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
         // Configure the cell...
-        let cell = tableView.dequeueReusableCell(withIdentifier: "cell", for: indexPath)
-        cell.textLabel?.text = "\(TableData[indexPath.row].name) - \(TableData[indexPath.row].email)"
+        let cell = tableView.dequeueReusableCell(withIdentifier: "cell", for: indexPath) as! ContactTableViewCell
+//        cell.textLabel?.text = "\(TableData[indexPath.row].name) - \(TableData[indexPath.row].email)"
+        cell.contactNameLabel?.text = "\(TableData[indexPath.row].name)"
+        cell.contactEmailLabel?.text = "\(TableData[indexPath.row].email)"
         return cell
     }
     
@@ -96,7 +104,7 @@ class TableControllerTableViewController: UITableViewController {
     
     override func tableView(_ tableView:UITableView, didSelectRowAt indexPath: IndexPath) {
         myIndex = indexPath.row
-        performSegue(withIdentifier: "segue", sender: self)
+        performSegue(withIdentifier: "showDetails", sender: self)
     }
     
     func getData(url: String) {
@@ -129,19 +137,27 @@ class TableControllerTableViewController: UITableViewController {
     }
     
     override func prepare(for segue: UIStoryboardSegue, sender: Any?) {
+
+        print(segue.identifier)
+        if(segue.identifier == "showDetails") {
+            // Get the index path from the cell that was tapped
+            let indexPath = tableView.indexPathForSelectedRow
+            // Get the Row of the Index Path and set as index
+            let index = indexPath?.row
+            // Get in touch with the DetailViewController
+            let detailViewController = segue.destination as! ViewController
+            // Pass on the data to the Detail ViewController by setting it's indexPathRow value
+            detailViewController.index = index ?? 0
+
+            detailViewController.name = TableData[index!].name
+
+            detailViewController.id = TableData[index!].id
+        }
+
+    }
+    
+    @IBAction func unWindToTableViewList(sender: UIStoryboardSegue) {
         
-        // Get the index path from the cell that was tapped
-        let indexPath = tableView.indexPathForSelectedRow
-        // Get the Row of the Index Path and set as index
-        let index = indexPath?.row
-        // Get in touch with the DetailViewController
-        let detailViewController = segue.destination as! ViewController
-        // Pass on the data to the Detail ViewController by setting it's indexPathRow value
-        detailViewController.index = index ?? 0
-        
-        detailViewController.name = TableData[index!].name
-        
-        detailViewController.id = TableData[index!].id
     }
 
 }

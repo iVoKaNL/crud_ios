@@ -46,7 +46,7 @@ class ViewController: UIViewController {
         Alamofire.request(test, method: .get).responseJSON {
             response in
             if response.result.isSuccess {
-                print("Success! We got weather data")
+                print("Success! We got weather dataaaaa")
                 
                 let weatherJSON : JSON = JSON(response.result.value!)
                 self.contact.id = weatherJSON["id"].intValue
@@ -65,6 +65,7 @@ class ViewController: UIViewController {
     }
     
     func setData() {
+        print(self.contact)
         self.nameLabel.text = "\(self.contact.id)"
         self.realNameLabel.text = self.contact.name
         self.emailLabel.text = self.contact.email
