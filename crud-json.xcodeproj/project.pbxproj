@@ -15,6 +15,7 @@
 		726B224B228DDDAB001AB71B /* LaunchScreen.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 726B2249228DDDAB001AB71B /* LaunchScreen.storyboard */; };
 		726B2253228DE39F001AB71B /* contact.swift in Sources */ = {isa = PBXBuildFile; fileRef = 726B2252228DE39F001AB71B /* contact.swift */; };
 		728013BE2295D47000773FC3 /* TableControllerTableViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 728013BD2295D47000773FC3 /* TableControllerTableViewController.swift */; };
+		72B62B112298A67B00B279E2 /* EditContactViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 72B62B102298A67B00B279E2 /* EditContactViewController.swift */; };
 		A4EE7AE754BAC24C7566878D /* Pods_crud_json.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = C4C7EEE1C76E6DCF4CDF05E3 /* Pods_crud_json.framework */; };
 /* End PBXBuildFile section */
 
@@ -29,6 +30,7 @@
 		726B224C228DDDAB001AB71B /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
 		726B2252228DE39F001AB71B /* contact.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = contact.swift; sourceTree = "<group>"; };
 		728013BD2295D47000773FC3 /* TableControllerTableViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TableControllerTableViewController.swift; sourceTree = "<group>"; };
+		72B62B102298A67B00B279E2 /* EditContactViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = EditContactViewController.swift; sourceTree = "<group>"; };
 		A4F9E5FA26AF47B012ABB926 /* Pods-crud-json.debug.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-crud-json.debug.xcconfig"; path = "Pods/Target Support Files/Pods-crud-json/Pods-crud-json.debug.xcconfig"; sourceTree = "<group>"; };
 		AB3460E612BD262C89CF5009 /* Pods-crud-json.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-crud-json.release.xcconfig"; path = "Pods/Target Support Files/Pods-crud-json/Pods-crud-json.release.xcconfig"; sourceTree = "<group>"; };
 		C4C7EEE1C76E6DCF4CDF05E3 /* Pods_crud_json.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = Pods_crud_json.framework; sourceTree = BUILT_PRODUCTS_DIR; };
@@ -85,6 +87,7 @@
 				726B224C228DDDAB001AB71B /* Info.plist */,
 				726B2252228DE39F001AB71B /* contact.swift */,
 				7247BE01229731E1006F37BF /* AddContactViewController.swift */,
+				72B62B102298A67B00B279E2 /* EditContactViewController.swift */,
 			);
 			path = "crud-json";
 			sourceTree = "<group>";
@@ -224,6 +227,7 @@
 				726B2253228DE39F001AB71B /* contact.swift in Sources */,
 				728013BE2295D47000773FC3 /* TableControllerTableViewController.swift in Sources */,
 				726B2241228DDDA9001AB71B /* AppDelegate.swift in Sources */,
+				72B62B112298A67B00B279E2 /* EditContactViewController.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};

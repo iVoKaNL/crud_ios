@@ -19,6 +19,9 @@ class ViewController: UIViewController {
     @IBOutlet weak var emailLabel: UILabel!
     @IBOutlet weak var phoneLabel: UILabel!
     
+    @IBOutlet weak var nameField: UITextField!
+    @IBOutlet weak var emailField: UITextField!
+    @IBOutlet weak var phoneField: UITextField!
     
     let Url = "http://localhost:8080/contacts"
     var contact : Contact = Contact()
@@ -36,9 +39,26 @@ class ViewController: UIViewController {
     override func viewDidLoad() {
         super.viewDidLoad()
         getData()
-
+        changeVisibility(visible: "label")
+        self.navigationItem.rightBarButtonItem = self.editButtonItem
         
         // Do any additional setup after loading the view, typically from a nib.       
+    }
+    
+    override func setEditing(_ editing: Bool, animated: Bool) {
+        super.setEditing(editing, animated: animated)
+        if(editing) {
+            print("test")
+            changeVisibility(visible: "field")
+
+        } else {
+            print("normaal")
+            updateContact()
+            self.realNameLabel.text = self.nameField.text!
+            self.emailLabel.text = self.emailField.text!
+            self.phoneLabel.text = self.phoneField.text!
+            changeVisibility(visible: "label")
+        }
     }
     
     func getData() {
@@ -70,6 +90,45 @@ class ViewController: UIViewController {
         self.realNameLabel.text = self.contact.name
         self.emailLabel.text = self.contact.email
         self.phoneLabel.text = self.contact.phone
+        self.nameField.text = self.contact.name
+        self.emailField.text = self.contact.email
+        self.phoneField.text = self.contact.phone
+    }
+    
+    func updateContact() {
+        let params = [
+            "name" : self.nameField.text!,
+            "email" : self.emailField.text!,
+            "phone" : self.phoneField.text!,
+        ]
+        let updateUrl = "\(self.Url)/\(self.contact.id)"
+        print(params)
+        Alamofire.request(updateUrl, method: .put, parameters: params, encoding: JSONEncoding.default).responseJSON {
+            response in
+            if response.result.isSuccess {
+                print("done")
+            } else {
+                print("Error \(String(describing: response.result.error))")
+            }
+        }    
+    }
+    
+    func changeVisibility(visible:String) {
+        if(visible == "label") {
+            self.realNameLabel.isHidden = false
+            self.emailLabel.isHidden = false
+            self.phoneLabel.isHidden = false
+            self.nameField.isHidden = true
+            self.emailField.isHidden = true
+            self.phoneField.isHidden = true
+        } else if (visible == "field") {
+            self.realNameLabel.isHidden = true
+            self.emailLabel.isHidden = true
+            self.phoneLabel.isHidden = true
+            self.nameField.isHidden = false
+            self.emailField.isHidden = false
+            self.phoneField.isHidden = false
+        }
     }
 
 

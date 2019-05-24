@@ -10,12 +10,28 @@ import UIKit
 
 class AddContactViewController: UIViewController {
 
+    var name: String = ""
+    var email: String = ""
+    var phone: String = ""
+    
+    @IBOutlet weak var contactName: UITextField!
+    @IBOutlet weak var contactEmail: UITextField!
+    @IBOutlet weak var contactPhone: UITextField!
+    
     @IBOutlet weak var cancel: UIBarButtonItem!
     @IBOutlet weak var done: UIBarButtonItem!
     override func viewDidLoad() {
         super.viewDidLoad()
 
         // Do any additional setup after loading the view.
+    }
+    
+    override func prepare(for segue: UIStoryboardSegue, sender: Any?) {
+        if segue.identifier == "doneSegue" {
+            name = contactName.text!
+            email = contactEmail.text!
+            phone = contactPhone.text!
+        }
     }
         
     
