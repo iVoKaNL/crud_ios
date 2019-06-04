@@ -23,7 +23,7 @@ class ViewController: UIViewController {
     @IBOutlet weak var emailField: UITextField!
     @IBOutlet weak var phoneField: UITextField!
     
-    let Url = "http://localhost:8080/contacts"
+    let Url = "http://192.168.2.56:8080/contacts"
     var contact : Contact = Contact()
     var sections = ["Id", "Name", "Email", "Phone"]
     var fruit = ["Orange", "Apple"]

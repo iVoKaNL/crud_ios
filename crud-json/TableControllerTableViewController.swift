@@ -20,7 +20,7 @@ class ContactTableViewCell:UITableViewCell {
 class TableControllerTableViewController: UITableViewController {
 
     var TableData:Array<Contact> = Array<Contact>()
-    let Url = "http://localhost:8080/contacts"
+    let Url = "http://192.168.2.56:8080/contacts"
     var newContact : Contact = Contact()
     
     var myIndex = 0
@@ -71,6 +71,7 @@ class TableControllerTableViewController: UITableViewController {
 
     override func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
         // #warning Incomplete implementation, return the number of rows
+        print("count")
         return TableData.count
     }
 
@@ -146,6 +147,7 @@ class TableControllerTableViewController: UITableViewController {
                     c.email = weatherJSON[n]["email"].stringValue
                     c.phone = weatherJSON[n]["phone"].stringValue
                     self.TableData.append(c)
+                    print("get")
                 }
                 DispatchQueue.global(qos: .userInitiated).async {
                     // Bounce back to the main thread to update the UI
